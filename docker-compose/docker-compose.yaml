@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  db:
+    image: mysql:5.7
+    container_name: stego-db
+    ports:
+     - ${DB_PUBLIC_PORT}:3306
+    env_file: ./.env
+    command:
+      - "mysqld"
+      - "--character-set-server=utf8mb4"
+      - "--collation-server=utf8mb4_bin"
+      - "--wait_timeout=60"
