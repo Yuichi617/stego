@@ -37,4 +37,9 @@
         WHERE
             movies.user_id = #{user_id}
     </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO movies (user_id, name, comment, eval, genre_id)
+        VALUES (#{userId}, #{name}, #{comment}, #{eval}, #{genreId})
+    </insert>
 </mapper>
