@@ -26,7 +26,7 @@
             movies.id = #{id}
     </select>
 
-    <select id="selectByUserId" resultType="com.movies.stegobe.domain.entity.MovieWithRelation">
+    <select id="selectBySearchParam" resultType="com.movies.stegobe.domain.entity.MovieWithRelation">
         SELECT
             movies.*,
             genres.name AS genre_name
@@ -35,6 +35,6 @@
         INNER JOIN genres
             ON genres.id = movies.genre_id
         WHERE
-            movies.user_id = #{userId}
+            movies.user_id = #{user_id}
     </select>
 </mapper>

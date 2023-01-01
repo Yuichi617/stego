@@ -1,5 +1,6 @@
 package com.movies.stegobe.app.internal_v1.controller
 
+import com.movies.stegobe.app.internal_v1.form.MovieSearchParam
 import com.movies.stegobe.domain.entity.MovieWithRelation
 import com.movies.stegobe.domain.service.MovieService
 import org.jetbrains.annotations.NotNull
@@ -12,19 +13,20 @@ class MovieController(
 ) {
 
     /**
-     *  ユーザIDで映画投稿取得
-     *  user_idが指定されなかった場合、全映画投稿取得
+     * 映画投稿GET
+     * @param searchParam 検索パラメータ
+     * @return 映画投稿
      */
     @GetMapping
-    fun getByUserId(
-        @RequestParam(value = "user_id", required = false) userId: Int?
-    ): List<MovieWithRelation> {
-        return movieService.findByUserId(userId)
-    }
+    fun get(@ModelAttribute searchParam: MovieSearchParam): List<MovieWithRelation>
+        = movieService.findAllByParam(searchParam)
 
-    /** IDで映画投稿取得 */
+    /**
+     * IDで映画投稿GET
+     * @param id ID
+     * @return 映画投稿
+     */
     @GetMapping("/{id}")
-    fun getById(@PathVariable @NotNull id: Int): MovieWithRelation {
-        return movieService.getById(id)
-    }
+    fun getById(@PathVariable @NotNull id: Int): MovieWithRelation =
+        movieService.getById(id)
 }

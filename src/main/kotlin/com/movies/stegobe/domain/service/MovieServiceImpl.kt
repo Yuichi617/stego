@@ -1,5 +1,6 @@
 package com.movies.stegobe.domain.service
 
+import com.movies.stegobe.app.internal_v1.form.MovieSearchParam
 import com.movies.stegobe.domain.entity.MovieWithRelation
 import com.movies.stegobe.domain.exception.NotFoundException
 import com.movies.stegobe.domain.repository.MovieWithRelationMapper
@@ -12,19 +13,18 @@ class MovieServiceImpl(
     private val userMapper: UserMapper
 ) : MovieService {
 
-    override fun findByUserId(userId: Int?): List<MovieWithRelation> {
-        return if (userId == null) {
+    override fun findAllByParam(searchParam: MovieSearchParam): List<MovieWithRelation> {
+        return if (searchParam.user_id == null) {
             movieWithRelationMapper.selectAll()
         } else {
             // 存在チェック
-            if (userMapper.selectById(userId) == null) {
+            if (userMapper.selectById(searchParam.user_id) == null) {
                 throw NotFoundException()
             }
-            movieWithRelationMapper.selectByUserId(userId)
+            movieWithRelationMapper.selectBySearchParam(searchParam)
         }
     }
 
-    override fun getById(id: Int): MovieWithRelation {
-        return movieWithRelationMapper.selectById(id)
-    }
+    override fun getById(id: Int): MovieWithRelation =
+        movieWithRelationMapper.selectById(id)
 }

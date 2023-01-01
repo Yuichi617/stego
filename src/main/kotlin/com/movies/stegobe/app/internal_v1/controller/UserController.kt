@@ -14,15 +14,18 @@ class UserController(
     private val userService: UserService
 ) {
 
-    /** 全ユーザ取得 */
+    /**
+     * ユーザGET
+     * @return ユーザ
+     */
     @GetMapping
-    fun get(): List<User> {
-        return userService.get()
-    }
+    fun get(): List<User> = userService.find()
 
-    /** IDでユーザ取得 */
+    /**
+     * IDでユーザGET
+     * @param id ID
+     * @return ユーザ
+     */
     @GetMapping("/{id}")
-    fun getById(@PathVariable @NotNull id: Int): User {
-        return userService.getById(id)
-    }
+    fun getById(@PathVariable @NotNull id: Int): User = userService.findById(id)
 }

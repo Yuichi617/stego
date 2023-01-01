@@ -4,9 +4,16 @@ import com.movies.stegobe.domain.entity.User
 
 interface UserService {
 
-    /** 全ユーザ取得 */
-    fun get(): List<User>
+    /**
+     * ユーザ検索
+     * @return ユーザ
+     */
+    fun find(): List<User>
 
-    /** IDでユーザ取得 */
-    fun getById(id: Int): User
+    /**
+     * IDでユーザ検索
+     * @param ID
+     * @return ユーザ
+     */
+    fun findById(id: Int): User
 }

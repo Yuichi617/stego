@@ -1,5 +1,6 @@
 package com.movies.stegobe.domain.repository
 
+import com.movies.stegobe.app.internal_v1.form.MovieSearchParam
 import com.movies.stegobe.domain.entity.MovieWithRelation
 import org.apache.ibatis.annotations.Mapper
 
@@ -10,5 +11,5 @@ interface MovieWithRelationMapper {
 
     fun selectById(id: Int): MovieWithRelation
 
-    fun selectByUserId(userId: Int): List<MovieWithRelation>
+    fun selectBySearchParam(searchParam: MovieSearchParam): List<MovieWithRelation>
 }

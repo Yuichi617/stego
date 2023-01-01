@@ -9,11 +9,7 @@ class UserServiceImpl(
     private val userMapper: UserMapper
 ) : UserService {
 
-    override fun get(): List<User> {
-        return userMapper.selectAll()
-    }
+    override fun find(): List<User> = userMapper.selectAll()
 
-    override fun getById(id: Int): User {
-        return userMapper.selectById(id)
-    }
+    override fun findById(id: Int): User = userMapper.selectById(id)
 }
