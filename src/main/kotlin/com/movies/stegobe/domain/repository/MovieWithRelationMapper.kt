@@ -8,11 +8,9 @@ import org.apache.ibatis.annotations.Mapper
 @Mapper
 interface MovieWithRelationMapper {
 
-    fun selectAll(): List<MovieWithRelation>
+    fun selectBySearchParam(searchParam: MovieSearchParam): List<MovieWithRelation>
 
     fun selectById(id: Int): MovieWithRelation
-
-    fun selectBySearchParam(searchParam: MovieSearchParam): List<MovieWithRelation>
 
     fun insert(movie: Movie): Int
 
