@@ -17,7 +17,7 @@ interface MovieService {
      * IDで関連情報付き映画投稿検索
      * @return 関連情報付き映画投稿
      */
-    fun findById(id: Int): MovieWithRelation
+    fun getById(id: Int): MovieWithRelation
 
     /**
      * 映画投稿保存

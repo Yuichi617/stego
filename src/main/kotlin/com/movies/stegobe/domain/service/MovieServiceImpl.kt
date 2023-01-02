@@ -21,7 +21,7 @@ class MovieServiceImpl(
         movieWithRelationMapper.selectBySearchParam(searchParam)
 
     @Transactional(readOnly = true)
-    override fun findById(id: Int): MovieWithRelation =
+    override fun getById(id: Int): MovieWithRelation =
         movieWithRelationMapper.selectById(id)
 
     @Transactional

@@ -31,7 +31,7 @@ class MovieController(
      */
     @GetMapping("/{id}")
     fun getById(@PathVariable @NotNull id: Int): MovieWithRelation =
-        movieService.findById(id)
+        movieService.getById(id)
 
     /**
      * 映画投稿POST
