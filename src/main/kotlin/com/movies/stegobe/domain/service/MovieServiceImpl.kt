@@ -29,6 +29,13 @@ class MovieServiceImpl(
         // 更新か
         val isUpdate = movie.id != null
 
+        // TODO: ジャンルの外部キー制約チェック実装
+        // 外部キー制約チェック
+        // ユーザ
+        if (movie.userId is Int && userMapper.selectById(movie.userId) == null) {
+            throw FkConstraintViolationException()
+        }
+
         // 存在チェック
         if (movie.id is Int && movieWithRelationMapper.selectById(movie.id) == null) {
             throw NotFoundException()
