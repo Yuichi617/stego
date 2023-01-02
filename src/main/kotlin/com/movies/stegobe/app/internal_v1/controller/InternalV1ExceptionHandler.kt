@@ -2,6 +2,7 @@ package com.movies.stegobe.app.internal_v1.controller
 
 import com.movies.stegobe.domain.exception.FkConstraintViolationException
 import com.movies.stegobe.domain.exception.NotFoundException
+import org.apache.commons.logging.LogFactory
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -18,6 +19,10 @@ import java.lang.Exception
 @RestControllerAdvice
 class InternalV1ExceptionHandler : ResponseEntityExceptionHandler() {
 
+    companion object {
+        private val log = LogFactory.getLog(InternalV1ExceptionHandler::class.java)
+    }
+
     override fun handleExceptionInternal(
         ex: Exception,
         body: Any?,
@@ -25,7 +30,7 @@ class InternalV1ExceptionHandler : ResponseEntityExceptionHandler() {
         status: HttpStatus,
         request: WebRequest
     ): ResponseEntity<Any> {
-
+        log.error(ex.message, ex)
         // エラー発生時は空のボディを返す
         return super.handleExceptionInternal(ex, null, headers, status, request)
     }
@@ -34,11 +39,13 @@ class InternalV1ExceptionHandler : ResponseEntityExceptionHandler() {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     fun handleNotFoundException(ex: NotFoundException) {
         // NotFoundExceptionがスローされた時、HTTPステータスコード404を返す
+        log.error(ex.message, ex)
     }
 
     @ExceptionHandler(FkConstraintViolationException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun handleFkConstraintViolationException(ex: FkConstraintViolationException) {
         // FkConstraintViolationExceptionがスローされた時、HTTPステータスコード400を返す
+        log.error(ex.message, ex)
     }
 }
