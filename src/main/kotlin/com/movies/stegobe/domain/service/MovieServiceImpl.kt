@@ -34,11 +34,35 @@ class MovieServiceImpl(
 
     @Transactional
     override fun save(movie: Movie): MovieWithRelation {
-        movieWithRelationMapper.insert(movie)
+        // 更新か
+        val isUpdate = movie.id != null
+
+        // 存在チェック
+        if (movie.id is Int && movieWithRelationMapper.selectById(movie.id) == null) {
+            throw NotFoundException()
+        }
+
+        // 保存
+        if (isUpdate) {
+            movieWithRelationMapper.update(movie)
+        } else {
+            movieWithRelationMapper.insert(movie)
+        }
+
         if (movie.id is Int) {
             return movieWithRelationMapper.selectById(movie.id)
         } else {
             throw RuntimeException()
         }
+    }
+
+    @Transactional
+    override fun delete(id: Int) {
+        // 存在チェック
+        if (id is Int && movieWithRelationMapper.selectById(id) == null) {
+            throw NotFoundException()
+        }
+        // 論理削除
+        movieWithRelationMapper.delete(id)
     }
 }

@@ -1,6 +1,6 @@
 package com.movies.stegobe.app.internal_v1.controller
 
-import com.movies.stegobe.app.internal_v1.form.MoviePostParam
+import com.movies.stegobe.app.internal_v1.form.MovieParam
 import com.movies.stegobe.app.internal_v1.form.MovieSearchParam
 import com.movies.stegobe.domain.entity.Movie
 import com.movies.stegobe.domain.entity.MovieWithRelation
@@ -39,7 +39,7 @@ class MovieController(
      * @return 関連情報付き映画投稿
      */
     @PostMapping
-    fun post(@RequestBody @Validated postParam: MoviePostParam): MovieWithRelation =
+    fun post(@RequestBody @Validated(MovieParam.Post::class) postParam: MovieParam): MovieWithRelation =
             movieService.save(Movie(
                 userId = postParam.user_id,
                 name = postParam.name,
@@ -47,4 +47,32 @@ class MovieController(
                 eval = postParam.eval,
                 genreId = postParam.genre_id
             ))
+
+    /**
+     * 映画投稿PUT
+     * @param id ID
+     * @param putParam 映画投稿PUTパラメータ
+     * @return 関連情報付き映画投稿
+     */
+    @PutMapping("/{id}")
+    fun put(
+        @PathVariable id: Int,
+        @RequestBody @Validated(MovieParam.Put::class) putParam: MovieParam
+    ): MovieWithRelation =
+        movieService.save(Movie(
+            id = id,
+            userId = putParam.user_id,
+            name = putParam.name,
+            comment = putParam.comment,
+            eval = putParam.eval,
+            genreId = putParam.genre_id
+        ))
+
+    /**
+     * 映画投稿DELETE
+     * @param id ID
+     */
+    @DeleteMapping("/{id}")
+    fun delete(@PathVariable id: Int) =
+        movieService.delete(id)
 }

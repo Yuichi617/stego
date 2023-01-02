@@ -12,6 +12,8 @@
             movies
         INNER JOIN genres
             ON genres.id = movies.genre_id
+        WHERE
+            movies.display_flag = 1
     </select>
 
     <select id="selectById" resultType="com.movies.stegobe.domain.entity.MovieWithRelation">
@@ -24,6 +26,7 @@
             ON genres.id = movies.genre_id
         WHERE
             movies.id = #{id}
+            AND movies.display_flag = 1
     </select>
 
     <select id="selectBySearchParam" resultType="com.movies.stegobe.domain.entity.MovieWithRelation">
@@ -36,10 +39,35 @@
             ON genres.id = movies.genre_id
         WHERE
             movies.user_id = #{user_id}
+            AND movies.display_flag = 1
     </select>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO movies (user_id, name, comment, eval, genre_id)
         VALUES (#{userId}, #{name}, #{comment}, #{eval}, #{genreId})
     </insert>
+
+    <update id="update">
+        UPDATE
+            movies
+        SET
+            user_id = #{userId},
+            name = #{name},
+            comment = #{comment},
+            eval = #{eval},
+            genre_id = #{genreId},
+            updated_at = CURRENT_TIMESTAMP
+        WHERE
+            id = #{id}
+    </update>
+
+    <update id="delete">
+        UPDATE
+            movies
+        SET
+            display_flag = 0,
+            deleted_at = CURRENT_TIMESTAMP
+        WHERE
+            id = #{id}
+    </update>
 </mapper>

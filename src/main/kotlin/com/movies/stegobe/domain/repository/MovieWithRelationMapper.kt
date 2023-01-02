@@ -15,4 +15,8 @@ interface MovieWithRelationMapper {
     fun selectBySearchParam(searchParam: MovieSearchParam): List<MovieWithRelation>
 
     fun insert(movie: Movie): Int
+
+    fun update(movie: Movie)
+
+    fun delete(id: Int)
 }
