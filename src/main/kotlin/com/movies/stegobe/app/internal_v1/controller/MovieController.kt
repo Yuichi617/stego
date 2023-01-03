@@ -21,8 +21,8 @@ class MovieController(
      * @return 関連情報付き映画投稿
      */
     @GetMapping
-    fun get(@ModelAttribute searchParam: MovieSearchParam): List<MovieWithRelation>
-        = movieService.findAllByParam(searchParam)
+    fun get(@ModelAttribute searchParam: MovieSearchParam): List<MovieWithRelation> =
+        movieService.findAllByParam(searchParam)
 
     /**
      * IDで映画投稿GET
