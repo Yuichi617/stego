@@ -9,7 +9,7 @@ data class Movie (
     val id: Int? = null,
     val userId: Int?,
     val name: String?,
-    val comment: String? = null,
+    val comment: String?,
     val eval: Int?,
     val genreId: Int?,
     val displayFlag: Int? = null,

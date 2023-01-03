@@ -6,9 +6,11 @@
 
     <select id="selectAll" resultType="com.movies.stegobe.domain.entity.User">
         SELECT
-               *
+            *
         FROM
-             users
+            users
+        WHERE
+            deleted_at IS NULL
     </select>
 
     <select id="selectById" resultType="com.movies.stegobe.domain.entity.User">
@@ -17,6 +19,32 @@
         FROM
             users
         WHERE
-            users.id = #{id}
+            deleted_at IS NULL
+            AND id = #{id}
     </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO users (name, password)
+        VALUES (#{name}, #{password})
+    </insert>
+
+    <update id="update">
+        UPDATE
+            users
+        SET
+            name = #{name},
+            password = #{password},
+            updated_at = CURRENT_TIMESTAMP
+        WHERE
+            id = #{id}
+    </update>
+
+    <update id="delete">
+        UPDATE
+            users
+        SET
+            deleted_at = CURRENT_TIMESTAMP
+        WHERE
+            id = #{id}
+    </update>
 </mapper>

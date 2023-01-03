@@ -11,4 +11,10 @@ interface MovieMapper {
     fun selectById(id: Int): Movie
 
     fun selectByUserId(userId: Int): List<Movie>
+
+    fun insert(movie: Movie): Int
+
+    fun update(movie: Movie)
+
+    fun delete(id: Int)
 }

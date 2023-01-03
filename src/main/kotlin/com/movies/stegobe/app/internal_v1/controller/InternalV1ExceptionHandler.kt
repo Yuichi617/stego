@@ -1,6 +1,7 @@
 package com.movies.stegobe.app.internal_v1.controller
 
 import com.movies.stegobe.domain.exception.FkConstraintViolationException
+import com.movies.stegobe.domain.exception.ForbiddenException
 import com.movies.stegobe.domain.exception.NotFoundException
 import org.apache.commons.logging.LogFactory
 import org.springframework.http.HttpHeaders
@@ -46,6 +47,13 @@ class InternalV1ExceptionHandler : ResponseEntityExceptionHandler() {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun handleFkConstraintViolationException(ex: FkConstraintViolationException) {
         // FkConstraintViolationExceptionがスローされた時、HTTPステータスコード400を返す
+        log.error(ex.message, ex)
+    }
+
+    @ExceptionHandler(ForbiddenException::class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    fun handleForbiddenException(ex: ForbiddenException) {
+        // ForbiddenExceptionがスローされた時、HTTPステータスコード403を返す
         log.error(ex.message, ex)
     }
 }

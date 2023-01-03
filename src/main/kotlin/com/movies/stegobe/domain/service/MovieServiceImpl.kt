@@ -5,6 +5,7 @@ import com.movies.stegobe.domain.entity.Movie
 import com.movies.stegobe.domain.entity.MovieWithRelation
 import com.movies.stegobe.domain.exception.FkConstraintViolationException
 import com.movies.stegobe.domain.exception.NotFoundException
+import com.movies.stegobe.domain.repository.MovieMapper
 import com.movies.stegobe.domain.repository.MovieWithRelationMapper
 import com.movies.stegobe.domain.repository.UserMapper
 import org.springframework.stereotype.Service
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class MovieServiceImpl(
     private val movieWithRelationMapper: MovieWithRelationMapper,
+    private val movieMapper: MovieMapper,
     private val userMapper: UserMapper
 ) : MovieService {
 
@@ -43,9 +45,9 @@ class MovieServiceImpl(
 
         // 保存
         if (isUpdate) {
-            movieWithRelationMapper.update(movie)
+            movieMapper.update(movie)
         } else {
-            movieWithRelationMapper.insert(movie)
+            movieMapper.insert(movie)
         }
 
         if (movie.id is Int) {
@@ -58,10 +60,10 @@ class MovieServiceImpl(
     @Transactional
     override fun delete(id: Int) {
         // 存在チェック
-        if (id is Int && movieWithRelationMapper.selectById(id) == null) {
+        if (movieWithRelationMapper.selectById(id) == null) {
             throw NotFoundException()
         }
         // 論理削除
-        movieWithRelationMapper.delete(id)
+        movieMapper.delete(id)
     }
 }

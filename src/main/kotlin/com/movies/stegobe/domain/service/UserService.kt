@@ -8,12 +8,26 @@ interface UserService {
      * ユーザ検索
      * @return ユーザ
      */
-    fun find(): List<User>
+    fun findAll(): List<User>
 
     /**
      * IDでユーザ検索
-     * @param ID
+     * @param id ID
      * @return ユーザ
      */
-    fun findById(id: Int): User
+    fun getById(id: Int): User
+
+    /**
+     * ユーザ保存
+     * @param user ユーザ
+     * @return ユーザ
+     */
+    fun save(user: User): User
+
+    /**
+     * ユーザ削除
+     * @param id ID
+     * @param userId ユーザID
+     */
+    fun delete(id: Int, userId: Int)
 }
