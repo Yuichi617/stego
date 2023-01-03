@@ -35,7 +35,7 @@ class MovieServiceImpl(
         // 外部キー制約チェック
         // ユーザ
         if (movie.userId is Int && userMapper.selectById(movie.userId) == null) {
-            throw FkConstraintViolationException()
+            throw FkConstraintViolationException(Movie::class, "userId", movie.userId)
         }
 
         // 存在チェック
