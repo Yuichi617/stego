@@ -14,7 +14,7 @@ class UserServiceImpl(
 
     override fun findAll(): List<User> = userMapper.selectAll()
 
-    override fun getById(id: Int): User = userMapper.selectById(id)
+    override fun getById(id: Int): User? = userMapper.selectById(id)
 
     override fun save(user: User): User {
         // 更新か
@@ -32,8 +32,12 @@ class UserServiceImpl(
             userMapper.insert(user)
         }
 
-        if (user.id is Int) {
-            return userMapper.selectById(user.id)
+        val savedUser =
+            if (user.id is Int) userMapper.selectById(user.id)
+            else null
+
+        if (savedUser != null) {
+            return savedUser
         } else {
             throw RuntimeException()
         }
@@ -47,8 +51,8 @@ class UserServiceImpl(
 
         // 権限チェック
         val user = userMapper.selectById(userId)
-        if (user.role != 1) {
-            throw ForbiddenException("Not authorized to update. user " + user.name)
+        if (user?.role != 1) {
+            throw ForbiddenException("Not authorized to update. user " + user?.name)
         }
 
         // 論理削除

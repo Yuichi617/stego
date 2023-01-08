@@ -23,7 +23,7 @@ class MovieServiceImpl(
         movieWithRelationMapper.selectBySearchParam(searchParam)
 
     @Transactional(readOnly = true)
-    override fun getById(id: Int): MovieWithRelation =
+    override fun getById(id: Int): MovieWithRelation? =
         movieWithRelationMapper.selectById(id)
 
     @Transactional
@@ -50,8 +50,12 @@ class MovieServiceImpl(
             movieMapper.insert(movie)
         }
 
-        if (movie.id is Int) {
-            return movieWithRelationMapper.selectById(movie.id)
+        val savedMovie =
+            if (movie.id is Int) movieWithRelationMapper.selectById(movie.id)
+            else null
+
+        if (savedMovie != null) {
+            return savedMovie
         } else {
             throw RuntimeException()
         }

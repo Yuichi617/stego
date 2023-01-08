@@ -15,7 +15,7 @@ interface UserService {
      * @param id ID
      * @return ユーザ
      */
-    fun getById(id: Int): User
+    fun getById(id: Int): User?
 
     /**
      * ユーザ保存

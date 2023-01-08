@@ -30,7 +30,7 @@ class UserController(
      * @return ユーザ
      */
     @GetMapping("/{id}")
-    fun getById(@PathVariable @NotNull id: Int): User = userService.getById(id)
+    fun getById(@PathVariable @NotNull id: Int): User? = userService.getById(id)
 
     /**
      * ユーザPOST

@@ -30,7 +30,7 @@ class MovieController(
      * @return 関連情報付き映画投稿
      */
     @GetMapping("/{id}")
-    fun getById(@PathVariable @NotNull id: Int): MovieWithRelation =
+    fun getById(@PathVariable @NotNull id: Int): MovieWithRelation? =
         movieService.getById(id)
 
     /**

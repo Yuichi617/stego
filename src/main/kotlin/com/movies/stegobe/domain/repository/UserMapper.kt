@@ -9,7 +9,7 @@ interface UserMapper {
 
     fun selectAll(): List<User>
 
-    fun selectById(id: Int): User
+    fun selectById(id: Int): User?
 
     fun insert(user: User): Int
 

@@ -9,5 +9,5 @@ interface MovieWithRelationMapper {
 
     fun selectBySearchParam(searchParam: MovieSearchParam): List<MovieWithRelation>
 
-    fun selectById(id: Int): MovieWithRelation
+    fun selectById(id: Int): MovieWithRelation?
 }
