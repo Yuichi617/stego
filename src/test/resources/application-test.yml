@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:mysql://${DB_TEST_HOST:localhost}:${DB_TEST_PORT:3306}/${DB_TEST_NAME:stego_test}
+    username: ${DB_TEST_USER:stego}
+    password: ${DB_TEST_PASSWORD:password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  #flyway:
+    # テストコード実行時はマイグレーションする
+    #enabled: true
+    # テスト実行時にV1.0.0が実行されるようにする
+    #baseline-on-migrate: true
+    #baseline-version: 0.0.0
