@@ -5,6 +5,8 @@ import com.movies.stegobe.app.internal_v1.form.MovieSearchParam
 import com.movies.stegobe.domain.entity.Movie
 import com.movies.stegobe.domain.entity.MovieWithRelation
 import com.movies.stegobe.domain.service.MovieService
+import io.swagger.annotations.ApiOperation
+import io.swagger.annotations.ApiParam
 import org.jetbrains.annotations.NotNull
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
@@ -21,6 +23,7 @@ class MovieController(
      * @return 関連情報付き映画投稿
      */
     @GetMapping
+    @ApiOperation(value = "映画投稿を取得する", notes = "")
     fun get(@ModelAttribute searchParam: MovieSearchParam): List<MovieWithRelation> =
         movieService.findAllByParam(searchParam)
 
@@ -30,7 +33,8 @@ class MovieController(
      * @return 関連情報付き映画投稿
      */
     @GetMapping("/{id}")
-    fun getById(@PathVariable @NotNull id: Int): MovieWithRelation? =
+    @ApiOperation(value = "IDで映画投稿を取得する", notes = "")
+    fun getById(@ApiParam(value = "映画投稿ID", example = "123") @PathVariable @NotNull id: Int): MovieWithRelation? =
         movieService.getById(id)
 
     /**
@@ -39,6 +43,7 @@ class MovieController(
      * @return 関連情報付き映画投稿
      */
     @PostMapping
+    @ApiOperation(value = "映画を登録する", notes = "")
     fun post(@RequestBody @Validated(MovieParam.Post::class) postParam: MovieParam): MovieWithRelation =
             movieService.save(Movie(
                 userId = postParam.user_id,
@@ -55,8 +60,9 @@ class MovieController(
      * @return 関連情報付き映画投稿
      */
     @PutMapping("/{id}")
+    @ApiOperation(value = "映画投稿を更新する", notes = "")
     fun put(
-        @PathVariable id: Int,
+        @ApiParam(value = "映画投稿ID", example = "123") @PathVariable id: Int,
         @RequestBody @Validated(MovieParam.Put::class) putParam: MovieParam
     ): MovieWithRelation =
         movieService.save(Movie(
@@ -73,6 +79,7 @@ class MovieController(
      * @param id ID
      */
     @DeleteMapping("/{id}")
-    fun delete(@PathVariable id: Int) =
+    @ApiOperation(value = "映画投稿を削除する", notes = "")
+    fun delete(@ApiParam(value = "映画投稿ID", example = "123") @PathVariable id: Int) =
         movieService.delete(id)
 }

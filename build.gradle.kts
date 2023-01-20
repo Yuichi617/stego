@@ -34,6 +34,8 @@ dependencies {
 	testImplementation("com.ninja-squad:DbSetup:2.1.0")
 
 	implementation("org.apache.commons:commons-lang3:3.0")
+
+	implementation ("io.springfox:springfox-boot-starter:3.0.0")
 }
 
 tasks.withType<KotlinCompile> {

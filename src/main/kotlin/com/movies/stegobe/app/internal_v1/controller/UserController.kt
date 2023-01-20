@@ -1,12 +1,11 @@
 package com.movies.stegobe.app.internal_v1.controller
 
-import com.movies.stegobe.app.internal_v1.form.MovieParam
 import com.movies.stegobe.app.internal_v1.form.UserDeleteParam
 import com.movies.stegobe.app.internal_v1.form.UserParam
-import com.movies.stegobe.domain.entity.Movie
-import com.movies.stegobe.domain.entity.MovieWithRelation
 import com.movies.stegobe.domain.entity.User
 import com.movies.stegobe.domain.service.UserService
+import io.swagger.annotations.ApiOperation
+import io.swagger.annotations.ApiParam
 import org.jetbrains.annotations.NotNull
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
@@ -22,6 +21,7 @@ class UserController(
      * @return ユーザ
      */
     @GetMapping
+    @ApiOperation(value = "ユーザを取得する", notes = "")
     fun get(): List<User> = userService.findAll()
 
     /**
@@ -30,7 +30,8 @@ class UserController(
      * @return ユーザ
      */
     @GetMapping("/{id}")
-    fun getById(@PathVariable @NotNull id: Int): User? = userService.getById(id)
+    @ApiOperation(value = "IDでユーザを取得する", notes = "")
+    fun getById(@ApiParam(value = "ユーザID", example = "123") @PathVariable @NotNull id: Int): User? = userService.getById(id)
 
     /**
      * ユーザPOST
@@ -38,6 +39,7 @@ class UserController(
      * @return ユーザ
      */
     @PostMapping
+    @ApiOperation(value = "ユーザを登録する", notes = "")
     fun post(@RequestBody @Validated postParam: UserParam): User =
         userService.save(
             User(
@@ -53,8 +55,9 @@ class UserController(
      * @return ユーザ
      */
     @PutMapping("/{id}")
+    @ApiOperation(value = "ユーザを更新する", notes = "")
     fun put(
-        @PathVariable id: Int,
+        @ApiParam(value = "ユーザID", example = "123") @PathVariable id: Int,
         @RequestBody @Validated putParam: UserParam
     ): User =
         userService.save(
@@ -70,8 +73,9 @@ class UserController(
      * @param id ID
      */
     @DeleteMapping("/{id}")
+    @ApiOperation(value = "ユーザを削除する", notes = "")
     fun delete(
-        @PathVariable id: Int,
+        @ApiParam(value = "ユーザID", example = "123") @PathVariable id: Int,
         @RequestBody @Validated deleteParam: UserDeleteParam
     ) =
         userService.delete(id, deleteParam.user_id)
