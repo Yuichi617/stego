@@ -1,6 +1,5 @@
 package com.movies.stegobe.domain.service
 
-import com.movies.stegobe.app.internal_v1.form.MovieSearchParam
 import com.movies.stegobe.domain.entity.Movie
 import com.movies.stegobe.domain.entity.MovieWithRelation
 import com.movies.stegobe.domain.exception.FkConstraintViolationException
@@ -8,6 +7,7 @@ import com.movies.stegobe.domain.exception.NotFoundException
 import com.movies.stegobe.domain.repository.MovieMapper
 import com.movies.stegobe.domain.repository.MovieWithRelationMapper
 import com.movies.stegobe.domain.repository.UserMapper
+import com.movies.stegobe.domain.selector.MovieSelector
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -19,8 +19,8 @@ class MovieServiceImpl(
 ) : MovieService {
 
     @Transactional(readOnly = true)
-    override fun findAllByParam(searchParam: MovieSearchParam): List<MovieWithRelation> =
-        movieWithRelationMapper.selectBySearchParam(searchParam)
+    override fun findAllByParam(selector: MovieSelector): List<MovieWithRelation> =
+        movieWithRelationMapper.selectBySearchParam(selector)
 
     @Transactional(readOnly = true)
     override fun getById(id: Int): MovieWithRelation? =

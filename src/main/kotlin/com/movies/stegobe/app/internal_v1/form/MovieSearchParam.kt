@@ -16,15 +16,12 @@ data class MovieSearchParam(
         const val LIMIT_MAX = 100
     }
 
-    /** ページ番号 */
-    val page = if (p == null) 1 else max(p, 1)
+    /** ページ番号を返す関数 */
+    private fun getPage(): Int = if (p == null) 1 else max(p, 1)
 
-    /** 表示件数 */
-    val limit = if (rc == null) 100 else max(min(rc, LIMIT_MAX), 0)
+    /** 表示件数を返す関数 */
+    fun getLimit(): Int = if (rc == null) 100 else max(min(rc, LIMIT_MAX), 0)
 
-    /** オフセット */
-    val offset = limit * (page -1)
-
-    /** 並び順 */
-    val sort = s
+    /** オフセットを返す関数 */
+    fun getOffset(): Int = getLimit() * (getPage() -1)
 }

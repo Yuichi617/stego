@@ -4,6 +4,7 @@ import com.movies.stegobe.app.internal_v1.form.MovieParam
 import com.movies.stegobe.app.internal_v1.form.MovieSearchParam
 import com.movies.stegobe.domain.entity.Movie
 import com.movies.stegobe.domain.entity.MovieWithRelation
+import com.movies.stegobe.domain.selector.MovieSelector
 import com.movies.stegobe.domain.service.MovieService
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiParam
@@ -25,7 +26,11 @@ class MovieController(
     @GetMapping
     @ApiOperation(value = "映画投稿を取得する", notes = "")
     fun get(@ModelAttribute searchParam: MovieSearchParam): List<MovieWithRelation> =
-        movieService.findAllByParam(searchParam)
+        movieService.findAllByParam(MovieSelector(
+            searchParam.user_id,
+            searchParam.getLimit(),
+            searchParam.getOffset(),
+            searchParam.s))
 
     /**
      * IDで映画投稿GET

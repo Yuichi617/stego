@@ -1,17 +1,17 @@
 package com.movies.stegobe.domain.service
 
-import com.movies.stegobe.app.internal_v1.form.MovieSearchParam
 import com.movies.stegobe.domain.entity.Movie
 import com.movies.stegobe.domain.entity.MovieWithRelation
+import com.movies.stegobe.domain.selector.MovieSelector
 
 interface MovieService {
 
     /**
      * 関連情報付き映画投稿検索
-     * @param searchParam 検索パラメータ
+     * @param selector セレクタ
      * @return 関連情報付き映画投稿
      */
-    fun findAllByParam(searchParam: MovieSearchParam): List<MovieWithRelation>
+    fun findAllByParam(selector: MovieSelector): List<MovieWithRelation>
 
     /**
      * IDで関連情報付き映画投稿検索
