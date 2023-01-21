@@ -4,7 +4,13 @@ spring:
     username: ${DB_USER}
     password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
-  #flyway:
+    hikari:
+      connection-timeout: 500
+      connection-init-sql: "SELECT 1"
+      validation-timeout: 400
+      maximum-pool-size: 10
+      max-lifetime: 570000
+    #flyway:
     # プロダクションコード実行時はマイグレーションしない
     #enabled: false
   mvc:
