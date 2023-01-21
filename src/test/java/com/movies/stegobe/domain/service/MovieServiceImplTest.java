@@ -1,7 +1,7 @@
 package com.movies.stegobe.domain.service;
 
 import com.movies.stegobe.ServiceTest;
-import com.movies.stegobe.app.internal_v1.form.MovieSearchParam;
+import com.movies.stegobe.domain.selector.MovieSelector;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -44,9 +44,9 @@ public class MovieServiceImplTest extends ServiceTest {
         void whenWithoutParamThenReturnsAll() {
             tracker.skipNextLaunch();
 
-            var searchParam = new MovieSearchParam(null, null, null, null);
+                var selector = new MovieSelector(null, 100, 100, null);
 
-            var result = target.findAllByParam(searchParam);
+            var result = target.findAllByParam(selector);
 
             System.out.println(result);
             assertEquals(1, 1);

@@ -6,6 +6,7 @@ plugins {
 	id ("org.flywaydb.flyway") version "7.5.2"
 	kotlin("jvm") version "1.6.21"
 	kotlin("plugin.spring") version "1.6.21"
+	id("org.springdoc.openapi-gradle-plugin") version "1.6.0"
 }
 
 group = "com.movies"
