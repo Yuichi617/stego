@@ -39,8 +39,8 @@
             ON genres.id = movies.genre_id
         WHERE
             movies.display_flag = 1
-            <if test="user_id != null">
-                AND movies.user_id = #{user_id}
+            <if test="userId != null">
+                AND movies.user_id = #{userId}
             </if>
         <include refid="MOVIE_ORDER_BY" />
         LIMIT
