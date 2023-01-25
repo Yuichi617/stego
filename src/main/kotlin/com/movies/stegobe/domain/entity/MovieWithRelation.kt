@@ -3,6 +3,9 @@ package com.movies.stegobe.domain.entity
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.time.LocalDateTime
 
+/**
+ * 映画投稿関連情報
+ */
 data class MovieWithRelation(
     @JsonProperty("id") val id: Int,
     @JsonProperty("user_id") val userId: Int,

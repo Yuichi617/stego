@@ -3,6 +3,9 @@ package com.movies.stegobe.domain.entity
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.time.LocalDateTime
 
+/**
+ * ジャンル
+ */
 data class Genre(
     @JsonProperty("id") val id: Int? = null,
     @JsonProperty("name") val name: String?,
