@@ -5,7 +5,7 @@ steps:
     args: [ 'assemble' ]
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/stego-be/stego-be-java-application', '.']
+    args: ['build', '-t', 'gcr.io/stego-be/stego-be-java-application', "--build-arg=JAR_FILE=build/libs/stego-be-0.0.1-SNAPSHOT.jar", '.']
   # Push the container image to Container Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/stego-be/stego-be-java-application']
