@@ -18,5 +18,8 @@ spring:
       # swaggerバグ対策
       matching-strategy: ANT_PATH_MATCHER
 
+server:
+  port: ${PORT:8080}
+
 mybatis:
   mapper-locations: classpath:mybatis/*.xml
