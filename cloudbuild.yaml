@@ -14,4 +14,4 @@ steps:
     entrypoint: gcloud
     args: ['run', 'deploy', 'stego-rest-api', '--image', 'gcr.io/stego-be/stego-be-java-application', '--region', 'asia-northeast1']
 images:
-  - gcr.io/PROJECT_ID/IMAGE
+  - gcr.io/stego-be/stego-be-java-application
