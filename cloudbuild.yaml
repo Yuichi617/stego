@@ -1,6 +1,6 @@
 steps:
   # build the java application
-  - name: gradle:5.6.2-jdk17
+  - name: gradle:jdk17-alpine
     entrypoint: gradle
     args: [ 'assemble' ]
   # Build the container image
