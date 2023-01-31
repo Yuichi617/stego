@@ -13,5 +13,5 @@
 .git
 .gitignore
 
-# Target directory for maven builds
-target/
+# Target directory for gradle builds
+build/
