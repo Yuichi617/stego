@@ -13,10 +13,6 @@ spring:
     #flyway:
     # プロダクションコード実行時はマイグレーションしない
     #enabled: false
-  mvc:
-    pathmatch:
-      # swaggerバグ対策
-      matching-strategy: ANT_PATH_MATCHER
 
 server:
   port: ${PORT:8080}

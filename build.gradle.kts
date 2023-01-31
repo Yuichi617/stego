@@ -21,6 +21,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-aop")
+	implementation ("org.springframework.boot:spring-boot-starter-actuator:2.7.8")
 
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -35,8 +36,6 @@ dependencies {
 	testImplementation("com.ninja-squad:DbSetup:2.1.0")
 
 	implementation("org.apache.commons:commons-lang3:3.0")
-
-	implementation ("io.springfox:springfox-boot-starter:3.0.0")
 }
 
 tasks.withType<KotlinCompile> {
